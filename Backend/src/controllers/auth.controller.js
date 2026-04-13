@@ -71,3 +71,8 @@ export const login = async (req, res) => {
     generateToken(user, res, 'User logged in successfully');
 
 }
+
+export const googleLogin = async (req, res) => {
+    console.log(req.user);
+    res.redirect(config.FRONTEND_URL);
+}

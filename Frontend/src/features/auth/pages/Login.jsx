@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router'; // or react-router-dom depending on setup, but using react-router as in Register
-import '../styles/login.scss';
+import '../styles/auth.scss';
 import { useAuth } from '../hooks/useAuth';
 import { useSelector } from 'react-redux';
 
@@ -82,6 +82,15 @@ const Login = () => {
             </button>
             
             {error && error.errors.length === 0 && <p className="fieldError">{error.message}</p>}
+
+            <div className="authDivider">
+              <span>OR</span>
+            </div>
+
+            <button type="button" className="googleBtn">
+              <span className="googleIcon" aria-hidden="true">G</span>
+              Continue with Google
+            </button>
           </form>
 
           <div className="footer">

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import '../styles/register.scss';
+import '../styles/auth.scss';
 import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useSelector } from 'react-redux';
@@ -96,6 +96,15 @@ const Register = () => {
               REGISTER
             </button>
             {error && error.errors.length === 0 && <p className="fieldError">{error.message}</p>}
+
+            <div className="authDivider">
+              <span>OR</span>
+            </div>
+
+            <a href={`${import.meta.env.VITE_BACKEND_URL}/api/auth/google`} type="button" className="googleBtn">
+              <span className="googleIcon" aria-hidden="true">G</span>
+              Continue with Google
+            </a>
           </form>
 
           <div className="footer">

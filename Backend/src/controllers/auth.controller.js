@@ -19,7 +19,7 @@ const generateToken = (user, res, message) => {
         success: true,
         user: {
             id: user._id,
-            name: user.name,
+            fullName: user.fullName,
             email: user.email,
             contact: user.contact,
             role: user.role
@@ -27,23 +27,47 @@ const generateToken = (user, res, message) => {
     })
 }
 
+const throwError = (message, code=400) => {
+    const err = new Error(message);
+    err.statusCode = code;
+    throw err;
+}
+
 export const register = async (req, res) => {
-    const { name, email, contact, password, role } = req.body;
+    const { fullName, email, contact, password, isSeller } = req.body;
 
     const alreadyExists = await userModel.findOne({ email });
 
     if (alreadyExists) {
-        return res.status(400).json({ message: 'User already exists' });
+        throwError('Email already exists', 409);
     }
 
-    const user = new userModel.create({
-        name,
+    const user = await userModel.create({
+        fullName,
         email,
         contact,
         password,
-        role
+        role: isSeller ? 'seller' : 'buyer'
     })
 
     generateToken(user, res, 'User registered successfully');
+}
+
+export const login = async (req, res) => {
+    const { email, password } = req.body;
+
+    const user = await userModel.findOne({ email }).select('+password');
+
+    if (!user) {
+        throwError('Invalid credentials', 401);
+    }
+
+    const isMatch = await user.comparePassword(password);
+
+    if(!isMatch) {
+        throwError('Invalid credentials', 401);
+    }
+
+    generateToken(user, res, 'User logged in successfully');
 
 }

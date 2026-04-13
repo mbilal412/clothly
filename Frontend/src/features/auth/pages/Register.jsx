@@ -1,8 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router';
 import '../styles/register.scss';
+import { useState } from 'react';
+import { useAuth } from '../hooks/useAuth';
+import { useSelector } from 'react-redux';
+
 
 const Register = () => {
+  const {error} = useSelector(state=>state.auth);
+  const {loading} = useSelector(state=>state.auth);
+
+  const {handleRegister} = useAuth();
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    contact: "",
+    password: "",
+    isSeller: false
+  })
+
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+    handleRegister(formData);
+    
+  }
+
+
   return (
     <div className="container">
       <div className="leftSide">
@@ -21,44 +44,64 @@ const Register = () => {
       </div>
       <div className="rightSide">
         <div className="formContainer">
-          <p className="membershipLabel">MEMBERSHIP</p>
           <h2 className="heading">Register Account</h2>
-          
-          <form className="form">
+          <p className="subHeading">Join the curated circle of modern elegance</p>
+
+          <form className="form" onSubmit={handleSubmit}>
             <div className="inputGroup">
               <label htmlFor="fullName">Full Name</label>
-              <input type="text" id="fullName" placeholder="Enter full name" />
+              <input
+                type="text"
+                id="fullName"
+                placeholder="Enter full name"
+                onChange={(e)=>setFormData({...formData, fullName: e.target.value})}
+                value={formData.fullName}
+                required
+              />
+              {error && error.errors.some(err => err.field === 'fullName') && (
+                <p className="fieldError">{error.errors.find(err => err.field === 'fullName').message}</p>
+              )}
             </div>
-            
+
             <div className="inputGroup">
               <label htmlFor="email">Email Address</label>
-              <input type="email" id="email" placeholder="Enter email address" />
+              <input type="email" id="email" placeholder="Enter email address" onChange={(e)=>setFormData({...formData, email: e.target.value})} value={formData.email} required />
+              {error && error.errors.some(err => err.field === 'email') && (
+                <p className="fieldError">{error.errors.find(err => err.field === 'email').message}</p>
+              )}
             </div>
-            
+
             <div className="inputGroup">
-              <label htmlFor="phone">Contact Number</label>
-              <input type="tel" id="phone" placeholder="Enter contact number" />
+              <label htmlFor="contact">Contact Number</label>
+              <input type="tel" id="contact" placeholder="Enter contact number" onChange={(e)=>setFormData({...formData, contact: e.target.value})} value={formData.contact} required />
+              {error && error.errors.some(err => err.field === 'contact') && (
+                <p className="fieldError">{error.errors.find(err => err.field === 'contact').message}</p>
+              )}
             </div>
-            
+
             <div className="inputGroup">
               <label htmlFor="password">Password</label>
-              <input type="password" id="password" placeholder="Enter password" />
+              <input type="password" id="password" placeholder="Enter password" onChange={(e)=>setFormData({...formData, password: e.target.value})} value={formData.password} required />
+              {error && error.errors.some(err => err.field === 'password') && (
+                <p className="fieldError">{error.errors.find(err => err.field === 'password').message}</p>
+              )}
             </div>
-            
+
             <div className="checkboxGroup">
-              <input type="checkbox" id="seller" />
+              <input type="checkbox" id="seller" onChange={(e)=>setFormData({...formData, isSeller: e.target.checked})} value={formData.isSeller} />
               <label htmlFor="seller">I want to register as a Seller</label>
             </div>
-            
-            <button type="button" className="submitBtn">
+
+            <button type="submit" className="submitBtn {loading ? 'loading' : ''}" disabled={loading}>
               REGISTER
             </button>
+            {error && error.errors.length === 0 && <p className="fieldError">{error.message}</p>}
           </form>
-          
+
           <div className="footer">
             ALREADY HAVE AN ACCOUNT? <Link to="/login">LOGIN</Link>
           </div>
-          
+
           <div className="disclaimer">
             <p>By registering, you agree to our Privacy Policy and Terms of Service. Your data is curated and protected within the Atelier framework.</p>
           </div>

@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-    name: {
+    fullName: {
         type: String,
         required: true
     },
@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
         select: false
     },
     role: {
-        type: Boolean,
+        type: String,
         enum: ['buyer', 'seller'],
         required: true
     }

@@ -202,8 +202,6 @@ html, body, #root {
   animation: slideLeft 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-// MEMBERSHIP eyebrow label
-
 
 .heading {
   font-family: $font-heading;
@@ -291,7 +289,7 @@ html, body, #root {
   font-size: 0.68rem;
   color: $error;
   line-height: 1.25;
-  margin-top: -0.1rem;
+  margin-top: -0.45rem;
   margin-bottom: 0.1rem;
   font-weight: 500;
 }

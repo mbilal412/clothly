@@ -1,11 +1,16 @@
 import { createBrowserRouter } from "react-router";
-import Register from "../features/auth/pages/Register";
-import Login from "../features/auth/pages/Login"
+import Register from "../features/auth/pages/register";
+import Login from "../features/auth/pages/login"
+import AddProduct from "../features/products/pages/AddProduct";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <>hello</>,
+        element: <AddProduct />,
+    },
+    {
+        path: "/add-product",
+        element: <AddProduct />,
     },
     {
         path: "/register",

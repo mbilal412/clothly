@@ -87,10 +87,10 @@ const Login = () => {
               <span>OR</span>
             </div>
 
-            <button type="button" className="googleBtn">
+            <a href={`${import.meta.env.VITE_BACKEND_URL}/api/auth/google`} type="button" className="googleBtn">
               <span className="googleIcon" aria-hidden="true">G</span>
               Continue with Google
-            </button>
+            </a>
           </form>
 
           <div className="footer">

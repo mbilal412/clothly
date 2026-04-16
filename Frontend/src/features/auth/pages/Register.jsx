@@ -4,13 +4,15 @@ import '../styles/auth.scss';
 import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 
 const Register = () => {
-  const {error} = useSelector(state=>state.auth);
-  const {loading} = useSelector(state=>state.auth);
+  const navigate = useNavigate();
+  const { error } = useSelector(state => state.auth);
+  const { loading } = useSelector(state => state.auth);
 
-  const {handleRegister} = useAuth();
+  const { handleRegister } = useAuth();
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -19,10 +21,15 @@ const Register = () => {
     isSeller: false
   })
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    handleRegister(formData);
-    
+    try {
+      await handleRegister(formData);
+      navigate('/');
+    } catch (err) {
+      console.error('something went wrong');
+    }
+
   }
 
 
@@ -54,7 +61,7 @@ const Register = () => {
                 type="text"
                 id="fullName"
                 placeholder="Enter full name"
-                onChange={(e)=>setFormData({...formData, fullName: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                 value={formData.fullName}
                 required
               />
@@ -65,7 +72,7 @@ const Register = () => {
 
             <div className="inputGroup">
               <label htmlFor="email">Email Address</label>
-              <input type="email" id="email" placeholder="Enter email address" onChange={(e)=>setFormData({...formData, email: e.target.value})} value={formData.email} required />
+              <input type="email" id="email" placeholder="Enter email address" onChange={(e) => setFormData({ ...formData, email: e.target.value })} value={formData.email} required />
               {error && error.errors.some(err => err.field === 'email') && (
                 <p className="fieldError">{error.errors.find(err => err.field === 'email').message}</p>
               )}
@@ -73,7 +80,7 @@ const Register = () => {
 
             <div className="inputGroup">
               <label htmlFor="contact">Contact Number</label>
-              <input type="tel" id="contact" placeholder="Enter contact number" onChange={(e)=>setFormData({...formData, contact: e.target.value})} value={formData.contact} required />
+              <input type="tel" id="contact" placeholder="Enter contact number" onChange={(e) => setFormData({ ...formData, contact: e.target.value })} value={formData.contact} required />
               {error && error.errors.some(err => err.field === 'contact') && (
                 <p className="fieldError">{error.errors.find(err => err.field === 'contact').message}</p>
               )}
@@ -81,14 +88,14 @@ const Register = () => {
 
             <div className="inputGroup">
               <label htmlFor="password">Password</label>
-              <input type="password" id="password" placeholder="Enter password" onChange={(e)=>setFormData({...formData, password: e.target.value})} value={formData.password} required />
+              <input type="password" id="password" placeholder="Enter password" onChange={(e) => setFormData({ ...formData, password: e.target.value })} value={formData.password} required />
               {error && error.errors.some(err => err.field === 'password') && (
                 <p className="fieldError">{error.errors.find(err => err.field === 'password').message}</p>
               )}
             </div>
 
             <div className="checkboxGroup">
-              <input type="checkbox" id="seller" onChange={(e)=>setFormData({...formData, isSeller: e.target.checked})} value={formData.isSeller} />
+              <input type="checkbox" id="seller" onChange={(e) => setFormData({ ...formData, isSeller: e.target.checked })} value={formData.isSeller} />
               <label htmlFor="seller">I want to register as a Seller</label>
             </div>
 

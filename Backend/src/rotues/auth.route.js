@@ -11,7 +11,7 @@ authRouter.post('/login', loginValidation, login);
 
 authRouter.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-authRouter.get('/google/callback', passport.authenticate('google',{session: false}), googleLogin);
+authRouter.get('/google/callback', passport.authenticate('google',{session: false, failureRedirect: `${process.env.FRONTEND_URL}/login`}), googleLogin);
 
 
 export default authRouter;

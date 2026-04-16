@@ -1,8 +1,10 @@
 import express from 'express';
 import cors from 'cors'
 import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
 import { config } from './config/config.js';
 import authRouter from './rotues/auth.route.js';
+import productRouter from './rotues/product.route.js';
 import errorHandler from './middlewares/error.middleware.js';
 import passport from 'passport';
 import { Strategy as googleStrategy } from 'passport-google-oauth20';
@@ -25,8 +27,10 @@ app.use(cors({
     credentials: true
 }))
 app.use(morgan('dev'));
+app.use(cookieParser());
 
 app.use('/api/auth', authRouter);
+app.use('/api/products', productRouter);
 
 app.use(errorHandler);
 

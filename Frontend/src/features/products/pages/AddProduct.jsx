@@ -1,12 +1,17 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { useProduct } from '../hooks/useProduct';
+import Navbar from '../../../app/components/Navbar';
 import '../styles/product.scss';
+import { useSelector } from 'react-redux';
 
 const MAX_IMAGES = 7;
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
+const getFileKey = (file) => `${file.name}-${file.size}-${file.lastModified}`;
 
 const AddProduct = () => {
+  const { error } = useSelector(state => state.product);
+  const {products} = useSelector(state => state.product);
   const navigate = useNavigate();
   const { handleCreateProduct } = useProduct();
   const fileInputRef = useRef(null);
@@ -15,10 +20,9 @@ const AddProduct = () => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [images, setImages] = useState([]);
+  const [isDragging, setIsDragging] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState({ type: '', message: '' });
-
-  const getFileKey = (file) => `${file.name}-${file.size}-${file.lastModified}`;
 
   const resetFileInput = () => {
     if (fileInputRef.current) {
@@ -26,39 +30,72 @@ const AddProduct = () => {
     }
   };
 
-  const onImageChange = (event) => {
-    const selected = Array.from(event.target.files || []);
-
-    if (!selected.length) {
+  const processSelectedFiles = (selectedFiles) => {
+    if (!selectedFiles.length) {
       return;
     }
 
-    const oversized = selected.filter((file) => file.size > MAX_FILE_SIZE);
-    const eligible = selected.filter((file) => file.size <= MAX_FILE_SIZE);
+    const imageFiles = selectedFiles.filter((file) => file.type.startsWith('image/'));
+    const nonImageCount = selectedFiles.length - imageFiles.length;
+    const oversized = imageFiles.filter((file) => file.size > MAX_FILE_SIZE);
+    const eligible = imageFiles.filter((file) => file.size <= MAX_FILE_SIZE);
 
-    setImages((prevImages) => {
-      const existingKeys = new Set(prevImages.map((file) => getFileKey(file)));
-      const uniqueNew = eligible.filter((file) => !existingKeys.has(getFileKey(file)));
-      return [...prevImages, ...uniqueNew].slice(0, MAX_IMAGES);
-    });
+    const existingKeys = new Set(images.map((file) => getFileKey(file)));
+    const uniqueNew = eligible.filter((file) => !existingKeys.has(getFileKey(file)));
+    const willExceedMax = images.length + uniqueNew.length > MAX_IMAGES;
 
-    const willExceedMax = images.length + eligible.length > MAX_IMAGES;
+    setImages([...images, ...uniqueNew].slice(0, MAX_IMAGES));
 
+    const notices = [];
+    if (nonImageCount > 0) {
+      notices.push(`Ignored ${nonImageCount} non-image file(s).`);
+    }
     if (oversized.length > 0) {
+      notices.push(`Ignored ${oversized.length} file(s) over 5MB.`);
+    }
+    if (willExceedMax) {
+      notices.push(`Only first ${MAX_IMAGES} images are kept.`);
+    }
+
+    if (notices.length > 0) {
       setStatus({
-        type: 'error',
-        message: `Ignored ${oversized.length} file(s) over 5MB.${willExceedMax ? ` First ${MAX_IMAGES} images were kept.` : ''}`,
-      });
-    } else if (willExceedMax) {
-      setStatus({
-        type: 'success',
-        message: `Only first ${MAX_IMAGES} images are kept.`,
+        type: nonImageCount > 0 || oversized.length > 0 ? 'error' : 'success',
+        message: notices.join(' '),
       });
     } else {
       setStatus({ type: '', message: '' });
     }
 
     resetFileInput();
+  };
+
+  const onImageChange = (event) => {
+    const selected = Array.from(event.target.files || []);
+    processSelectedFiles(selected);
+  };
+
+  const onDragOver = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const onDragLeave = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      setIsDragging(false);
+    }
+  };
+
+  const onDrop = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setIsDragging(false);
+
+    const droppedFiles = Array.from(event.dataTransfer.files || []);
+    processSelectedFiles(droppedFiles);
   };
 
   const removeImage = (indexToRemove) => {
@@ -76,6 +113,7 @@ const AddProduct = () => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
+    
     setStatus({ type: '', message: '' });
 
     const parsedPrice = Number(price);
@@ -85,6 +123,7 @@ const AddProduct = () => {
       return;
     }
 
+    console.log('hello')
     if (images.length === 0) {
       setStatus({ type: 'error', message: 'Upload at least one image.' });
       return;
@@ -99,42 +138,36 @@ const AddProduct = () => {
     setSubmitting(true);
 
     try {
-      const response = await handleCreateProduct(formData);
-      setStatus({
-        type: 'success',
-        message: response?.message || 'Product created successfully.',
-      });
+      await handleCreateProduct(formData);
+      setStatus({ type: 'success', message: 'Product added successfully!' });
       clearForm();
     } catch (error) {
-      const firstFieldError = Array.isArray(error?.errors) && error.errors.length > 0
-        ? error.errors[0].message
-        : '';
-
-      setStatus({
-        type: 'error',
-        message: firstFieldError || error?.message || 'Failed to create product.',
-      });
+      setStatus({ type: 'error', message: 'Failed to add product.' });
     } finally {
       setSubmitting(false);
     }
   };
 
+  const imagePreviews = useMemo(
+    () => images.map((file) => ({
+      key: getFileKey(file),
+      name: file.name,
+      url: URL.createObjectURL(file),
+    })),
+    [images],
+  );
+
+  useEffect(() => () => {
+    imagePreviews.forEach((preview) => URL.revokeObjectURL(preview.url));
+  }, [imagePreviews]);
+  
+
+
   const imageCountLabel = `${images.length} / ${MAX_IMAGES}`;
-  const onLogout = () => navigate('/login');
 
   return (
     <div className="productPage">
-      <header className="topNav">
-        <h2 className="brand">Clothly</h2>
-
-        <nav className="navLinks">
-          <Link to="/" className="navLink">Home</Link>
-          <button type="button" className="navLink navButton">View Product</button>
-          <Link to="/add-product" className="navLink active">Add Product</Link>
-        </nav>
-
-        <button type="button" className="logoutBtn" onClick={onLogout}>Logout</button>
-      </header>
+      <Navbar activePage="add-product" />
 
       <main className="pageContent">
         <header className="headingBlock">
@@ -156,6 +189,9 @@ const AddProduct = () => {
                   onChange={(event) => setTitle(event.target.value)}
                   required
                 />
+                {error && error.errors.some((err) => err.field === 'title') && (
+                  <p className="fieldError">{error.errors.find((err) => err.field === 'title').message}</p>
+                )}
               </div>
 
               <div className="inputGroup priceGroup">
@@ -166,14 +202,17 @@ const AddProduct = () => {
                     id="price"
                     name="price"
                     type="number"
-                    min="0.01"
-                    step="0.01"
+                    min="1"
+                    step="1"
                     placeholder="0"
                     value={price}
                     onChange={(event) => setPrice(event.target.value)}
                     required
                   />
                 </div>
+                {error && error.errors.some((err) => err.field === 'price') && (
+                  <p className="fieldError">{error.errors.find((err) => err.field === 'price').message}</p>
+                )}
               </div>
 
               <div className="inputGroup descriptionGroup">
@@ -187,6 +226,9 @@ const AddProduct = () => {
                   onChange={(event) => setDescription(event.target.value)}
                   required
                 />
+                {error && error.errors.some((err) => err.field === 'description') && (
+                  <p className="fieldError">{error.errors.find((err) => err.field === 'description').message}</p>
+                )}
               </div>
             </section>
 
@@ -199,7 +241,14 @@ const AddProduct = () => {
                 <span>{imageCountLabel}</span>
               </div>
 
-              <label htmlFor="images" className="uploadZone">
+              <label
+                htmlFor="images"
+                className={`uploadZone ${isDragging ? 'dragActive' : ''}`}
+                onDragEnter={onDragOver}
+                onDragOver={onDragOver}
+                onDragLeave={onDragLeave}
+                onDrop={onDrop}
+              >
                 <div className="uploadIcon">+</div>
                 <strong>Click to upload or drag and drop</strong>
                 <small>PNG, JPG or WEBP up to 5MB</small>
@@ -215,18 +264,24 @@ const AddProduct = () => {
                 ref={fileInputRef}
               />
 
-              {images.length > 0 ? (
+              {error && error.errors.some((err) => err.field === 'images') && (
+                <p className="fieldError">{error.errors.find((err) => err.field === 'images').message}</p>
+              )}
+
+              {imagePreviews.length > 0 ? (
                 <ul className="fileList" aria-label="Selected image files">
-                  {images.map((file, index) => (
-                    <li key={getFileKey(file)} className="fileItem">
-                      <span>{file.name}</span>
+                  {imagePreviews.map((preview, index) => (
+                    <li key={preview.key} className="fileItem">
+                      <img className="filePreview" src={preview.url} alt={preview.name} />
+
                       <button
                         type="button"
                         className="removeImageBtn"
                         onClick={() => removeImage(index)}
-                        aria-label={`Remove ${file.name}`}
+                        aria-label={`Remove ${preview.name}`}
+                        title={`Remove ${preview.name}`}
                       >
-                        Remove
+                        &#10005;
                       </button>
                     </li>
                   ))}

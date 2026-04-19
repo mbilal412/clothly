@@ -1,43 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 
-// ─── Stitch Design System Tokens: Clothly "Midnight Atelier" ────────────────
-// Exact values from projects/12746989695413788980
-
-// Surface palette
-$surface:                   #0b1229;
-$surface-dim:               #0b1229;
-$surface-container-lowest:  #060d24;
-$surface-container-low:     #141a32;
-$surface-container:         #181e36;
-$surface-container-high:    #222941;
-$surface-container-highest: #2d344c;
-$surface-bright:            #323851;
-$surface-variant:           #2d344c;
-
-// Primary (Gold)
-$primary:               #e9c349;
-$primary-dim:           #e9c349;
-$on-primary:            #3c2f00;
-$on-primary-container:  #997a00;
-$primary-container:     #191200;
-
-// On-surfaces
-$on-surface:         #dce1ff;
-$on-surface-variant: #c6c6ce;
-
-// Outline
-$outline:         #909098;
-$outline-variant: #46464d;
-
-// Error
-$error: #ffb4ab;
-
-// Secondary
-$secondary: #c6c6c7;
-
-// Typography
-$font-body:     'Inter', sans-serif;
-$font-heading:  'Manrope', sans-serif;
+@import '../../../app/styles/tokens';
 
 // ─── Reset ─────────────────────────────────────────────────────────────────
 
@@ -49,8 +12,6 @@ $font-heading:  'Manrope', sans-serif;
 
 html, body, #root {
   width: 100%;
-  height: 100%;
-  overflow: hidden;
   background-color: $surface;
   color: $on-surface;
 }

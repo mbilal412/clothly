@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CLOTHLY | My Products</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#e9c176",
+                        "secondary-fixed": "#dce1ff",
+                        "secondary-container": "#424862",
+                        "outline": "#9a8f80",
+                        "on-tertiary-fixed": "#001a41",
+                        "error-container": "#93000a",
+                        "on-tertiary-container": "#233a65",
+                        "inverse-surface": "#e5e2e1",
+                        "inverse-on-surface": "#313030",
+                        "surface-container-highest": "#353534",
+                        "background": "#131313",
+                        "surface-container-lowest": "#0e0e0e",
+                        "primary-fixed-dim": "#e9c176",
+                        "secondary": "#bfc5e4",
+                        "on-error-container": "#ffdad6",
+                        "surface-tint": "#e9c176",
+                        "on-tertiary": "#173059",
+                        "on-primary-fixed": "#261900",
+                        "on-background": "#e5e2e1",
+                        "on-error": "#690005",
+                        "tertiary-container": "#8fa5d6",
+                        "on-secondary-fixed": "#141a32",
+                        "outline-variant": "#4e4639",
+                        "on-tertiary-fixed-variant": "#304671",
+                        "tertiary-fixed-dim": "#b0c6f9",
+                        "on-surface-variant": "#d1c5b4",
+                        "surface-dim": "#131313",
+                        "secondary-fixed-dim": "#bfc5e4",
+                        "error": "#ffb4ab",
+                        "surface-bright": "#393939",
+                        "surface": "#131313",
+                        "on-surface": "#e5e2e1",
+                        "on-primary-container": "#4e3700",
+                        "surface-container-high": "#2a2a2a",
+                        "inverse-primary": "#775a19",
+                        "on-primary": "#412d00",
+                        "surface-container": "#201f1f",
+                        "primary-fixed": "#ffdea5",
+                        "on-secondary-container": "#b1b7d6",
+                        "on-secondary": "#292f48",
+                        "on-primary-fixed-variant": "#5d4201",
+                        "tertiary-fixed": "#d8e2ff",
+                        "primary-container": "#c5a059",
+                        "tertiary": "#b0c6f9",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-variant": "#353534",
+                        "on-secondary-fixed-variant": "#3f465f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #e9c176 0%, #c5a059 100%);
+        }
+        .editorial-shadow {
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 rounded-none bg-[#131313]/80 backdrop-blur-xl flex justify-between items-center px-12 h-20 w-full">
+<div class="flex items-center gap-12">
+<span class="text-2xl font-bold tracking-tighter text-[#E9C176] uppercase font-headline">CLOTHLY</span>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-gray-500 font-['Inter'] uppercase tracking-[0.05em] text-[10px] hover:text-white transition-colors transition-opacity duration-300" href="#">Home</a>
+<a class="text-[#E9C176] border-b border-[#E9C176] pb-1 font-medium transition-all uppercase tracking-[0.05em] text-[10px]" href="#">View Products</a>
+<a class="text-gray-500 font-['Inter'] uppercase tracking-[0.05em] text-[10px] hover:text-white transition-colors transition-opacity duration-300" href="#">Add Product</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-label">Seller Account</p>
+</div>
+<img alt="Seller Account Avatar" class="w-10 h-10 rounded-full object-cover border border-primary/20" data-alt="Close-up portrait of a professional man in a dark suit against a minimalist dark studio background, high-end fashion photography style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvOE5afbo7JyF8iQ6MFcMRen4dDz94V20Z1J2RMFDbFLA4xDTnZzP-B-X8MIqyi1mEVVF6lgta_jdagqbWcNU3R8MgfHPqLUbLI9DiEoKKC6mF-p5F00h70Dm8ExjWv2Ry4CuIwC8MXld6Ri7CJsgVGTV783iLRlXOSO7L3A5whZjJbfXodhnkez2ZpxdcGu-seyFYojq0VZkbrPZbXFnBAWTZ5EudHHcCEot_diTJPeVZ4c51e21pUnoNLrrB5A1afTVQHdaVVOZM"/>
+</div>
+<button class="text-gray-500 font-['Inter'] uppercase tracking-[0.1em] text-[10px] hover:text-white transition-colors">Logout</button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-32 pb-24 px-12 max-w-[1600px] mx-auto">
+<!-- Header Section -->
+<header class="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
+<div class="max-w-2xl">
+<p class="text-primary font-label uppercase tracking-[0.2em] text-[11px] mb-4">Inventory Management</p>
+<h1 class="font-headline text-5xl md:text-7xl font-bold tracking-[-0.03em] leading-none mb-6">Your Curated Collection</h1>
+<p class="text-on-surface-variant font-light text-lg leading-relaxed max-w-xl">
+                    Manage your atelier's digital presence. Every piece is a statement of craftsmanship and timeless elegance.
+                </p>
+</div>
+<div class="flex gap-4">
+<button class="px-8 py-4 border border-outline-variant/20 hover:border-primary/50 text-on-surface font-label uppercase tracking-widest text-xs transition-all flex items-center gap-2 group">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                    Filter
+                </button>
+<button class="px-8 py-4 gold-gradient text-on-primary font-bold font-label uppercase tracking-widest text-xs transition-all editorial-shadow flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">add</span>
+                    New Listing
+                </button>
+</div>
+</header>
+<!-- Product Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-16">
+<!-- Card 1 -->
+<div class="group">
+<div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low mb-6">
+<img alt="Midnight Silk Blazer" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Luxury midnight navy silk blazer draped over a minimalist mannequin, dramatic shadows, soft highlights on silk texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaqYqZ48x19eVokVMoXfyH8ge-u0dKcw03ZhoH3Yt6EvVoWMM7aafx7tMdi79ckVVJ2hieEF6YKwmxUOA802adNJ5EF-3vPISSArStGF8rvqqz9KCZoNo5c2BP2cKao1Dt0UGJ_xhsGPGMYfOyZHqNspl6L51UeBGRZM5AvSHHjN66zt-k19hRfy6sdzuhbw8Q69NbdSkhImTTGr_fGiDpBiF2Rheesy-_tieRi-iE-x0AY3NeXxUUmDEhahVjtr11CMNuI0N1mVj-"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+<button class="w-full py-3 bg-white/10 backdrop-blur-md border border-white/20 text-white font-label uppercase tracking-widest text-[10px]">Quick Edit</button>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline text-xl font-medium tracking-tight mb-1 group-hover:text-primary transition-colors">Midnight Silk Blazer</h3>
+<p class="text-on-surface-variant font-label uppercase tracking-widest text-[10px]">Evening Wear • In Stock</p>
+</div>
+<p class="font-headline text-primary font-bold">PKR 24,500</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group">
+<div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low mb-6">
+<img alt="Gold Patterned Scarf" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Intricate gold patterned silk scarf laid out on dark charcoal fabric, high contrast lighting showing fine embroidery" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF1J-fFipsQ6aj184USEMND5Eu2SE-9kxb6i5Hy6L6rM6MJtytrPEIpcENNz9bPk2BXeg4NNY9Au6oylBzXAJUwj8kp1Hgch7KEiP_vPvi0wOtRBv3AyuWvlItzt20IuSbrNPMy0ntYvng9qqY9T2uJF8ZzJpNLRWIIEOXBe9upUgKbaRF4B4Bv9wtm5SYbqnHb3w1c5CbYuOU4eM9ItqfpIzy9wAPFgA3Hn0Vb9eszoJjgRbWqJRoFBEX8xCRg2eDEUEPNGkiEKA8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+<button class="w-full py-3 bg-white/10 backdrop-blur-md border border-white/20 text-white font-label uppercase tracking-widest text-[10px]">Quick Edit</button>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline text-xl font-medium tracking-tight mb-1 group-hover:text-primary transition-colors">Gold Patterned Scarf</h3>
+<p class="text-on-surface-variant font-label uppercase tracking-widest text-[10px]">Accessories • 12 Remaining</p>
+</div>
+<p class="font-headline text-primary font-bold">PKR 8,200</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group">
+<div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low mb-6">
+<img alt="Velvet Smoking Jacket" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Deep emerald velvet smoking jacket against a dark wood background, moody lighting, highlighting the plush texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6Zsw4v6G9rBg1Q6AWnhREQ5R3Mmu3ssGhBu2D0B7UwWDW70ZlBfJBy-8i5WBEAoUXbOPO7j99F4Uv0lbprJ4Be6TpNsoVzn0DieROSRORSVKS5_Ep1z-ffw5Pb0CLbkhp_dv0axHle_1ScWfKxtSoseEoKhNsFIB8_JGAF7aUAelZg3AIpTrg713ktQWPZxbr6818ZxyIrclNmQVZ6hQ1Nw1EqnAQulRRhFfJ6d1KoIiqGwWNGKk92YJS-DVCi1N3VCqpchqKXu9G"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+<button class="w-full py-3 bg-white/10 backdrop-blur-md border border-white/20 text-white font-label uppercase tracking-widest text-[10px]">Quick Edit</button>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline text-xl font-medium tracking-tight mb-1 group-hover:text-primary transition-colors">Velvet Smoking Jacket</h3>
+<p class="text-on-surface-variant font-label uppercase tracking-widest text-[10px]">Signature • Low Stock</p>
+</div>
+<p class="font-headline text-primary font-bold">PKR 42,000</p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group">
+<div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low mb-6">
+<img alt="Charcoal Wool Trousers" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Tailored charcoal wool trousers folded neatly on a slate surface, architectural lines, dramatic minimalist aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcxpYqNlmlDWpFhAGmIxFq1h2t0jQi-cKHrVbbwYVrO4XzeYdAI0rdeXpl4o9LQl8UFVXCCpPxKVZMLsIBU1dSxBG66TRnXAaq86NZ85owEZl15cj_TyRd66BHbY9qHnZW-RHitcxDhTrIeK_mga4Skv0g02cP8X-P9N2AIUotDCIR8vt8p1A0JamuSgqVWHn_xWWzY7OcyYdeoAoTbUpN-km_7O5s57PauI9M9uH9t1imUddy1k2DMd7cUe5H70Y-BTOQR_taS0vV"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+<button class="w-full py-3 bg-white/10 backdrop-blur-md border border-white/20 text-white font-label uppercase tracking-widest text-[10px]">Quick Edit</button>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline text-xl font-medium tracking-tight mb-1 group-hover:text-primary transition-colors">Charcoal Wool Trousers</h3>
+<p class="text-on-surface-variant font-label uppercase tracking-widest text-[10px]">Essential • In Stock</p>
+</div>
+<p class="font-headline text-primary font-bold">PKR 16,800</p>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="group lg:translate-y-12">
+<div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low mb-6">
+<img alt="Monogrammed Silk Robe" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Luxury champagne colored silk robe with subtle monogram embroidery, elegant drape, warm incandescent lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_SB6U8YT_hWMQVfbDI44370L6tlFq2EujUlkxFZrQOmCD0paIQqf3HmVVz7kBJ_Wrpw784x93cBebp78-prw4qiRD_FPs076A6Img1Lkxq8VAW59Zgi4wjfsn9AG6fbZeRM9Qw0LQQTZiAH2jZU3UhoZ7xGnyFQSUmcCqMklBfZxar1SMpiQDkqhKqNbo0OLbgIAJge7RI0SmW82axL1VOZFnQEWqN4lljKR6Erx4QRECrfuft2C4yK22EiGBvWlGiqtv4MQ5Unvo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+<button class="w-full py-3 bg-white/10 backdrop-blur-md border border-white/20 text-white font-label uppercase tracking-widest text-[10px]">Quick Edit</button>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline text-xl font-medium tracking-tight mb-1 group-hover:text-primary transition-colors">Monogrammed Silk Robe</h3>
+<p class="text-on-surface-variant font-label uppercase tracking-widest text-[10px]">Lounge • Made to Order</p>
+</div>
+<p class="font-headline text-primary font-bold">PKR 31,500</p>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="group lg:translate-y-12">
+<div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low mb-6">
+<img alt="Ebony Evening Shirt" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Crisp black cotton evening shirt with concealed placket, high end studio lighting on dark fabric textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYA5k-X8OgsusuRa4-lK3ofG6n1g04TQEzHYw00HOAZBVDjquLBhH8VBE6bXfHe7wo5x2kG0Sty_1nXynOzIXqPpLK6rNVYOi4ZXdEC_2o8eHjt7Uj91O9uuV4KRxjre54XfbdFnTXYiy4KScMdcopzSOcdl5rtJ_cChWNv8pvUQR02RAFRJjrwOKPc3O3OsMLK4_EG5gNvwzr2g4AfLeriLR44K98ZrNTm35YCghQuWeVXceT7PB8nxCp1R66G3daX0u5JH6mJ5Sg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+<button class="w-full py-3 bg-white/10 backdrop-blur-md border border-white/20 text-white font-label uppercase tracking-widest text-[10px]">Quick Edit</button>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline text-xl font-medium tracking-tight mb-1 group-hover:text-primary transition-colors">Ebony Evening Shirt</h3>
+<p class="text-on-surface-variant font-label uppercase tracking-widest text-[10px]">Evening Wear • In Stock</p>
+</div>
+<p class="font-headline text-primary font-bold">PKR 12,900</p>
+</div>
+</div>
+<!-- Card 7 -->
+<div class="group lg:translate-y-12">
+<div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low mb-6">
+<img alt="Bespoke Cashmere Coat" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Heavy camel cashmere coat hanging in a dark oak closet, soft directional light catching the fine wool fibers" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWc4fAGraKT9P4ZaF_G5T9Q2WDXD4IQxxYofEy0GtI3HnKFDwZkDB0f0ObskrvIHKeVSkHnPUiW3quuza7bsfMOA5gmtVar6IeofVBLjizwR9cN7GGFvNNSIli3hEay-l644ubsEtPPdjCFP0Zh_8vkGZaGu0t-mJNBkpsQuP51KJ4-4SLbsM-il_vmGAy12AZ1UGA9gdcqY9mVu_8CZ-YTIvOpnL-Kx6t36TETYx87vnTyErAtD1l8E_g18JnbKVMILl0sO1ek_TT"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+<button class="w-full py-3 bg-white/10 backdrop-blur-md border border-white/20 text-white font-label uppercase tracking-widest text-[10px]">Quick Edit</button>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline text-xl font-medium tracking-tight mb-1 group-hover:text-primary transition-colors">Bespoke Cashmere Coat</h3>
+<p class="text-on-surface-variant font-label uppercase tracking-widest text-[10px]">Outerwear • Out of Stock</p>
+</div>
+<p class="font-headline text-primary font-bold opacity-50">PKR 55,000</p>
+</div>
+</div>
+<!-- Card 8 - Empty State Suggestion / Add New -->
+<div class="group lg:translate-y-12">
+<div class="relative aspect-[3/4] border-2 border-dashed border-outline-variant/30 flex flex-col items-center justify-center p-8 text-center group-hover:border-primary/50 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-4xl text-outline-variant group-hover:text-primary mb-4 transition-colors">add_circle</span>
+<h3 class="font-headline text-lg font-medium mb-2">Expand Collection</h3>
+<p class="text-on-surface-variant font-label uppercase tracking-widest text-[10px]">Create a new listing for your atelier</p>
+</div>
+</div>
+</div>
+<!-- Pagination / Load More (Editorial Style) -->
+<div class="mt-40 text-center">
+<button class="group inline-flex flex-col items-center gap-4">
+<span class="text-on-surface-variant font-label uppercase tracking-[0.4em] text-[10px]">Discover More Pieces</span>
+<span class="material-symbols-outlined text-primary group-hover:translate-y-2 transition-transform">keyboard_double_arrow_down</span>
+</button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#131313] border-t border-white/5 flex flex-col md:flex-row justify-between items-center px-12 py-10 w-full gap-4">
+<div class="flex items-center gap-8">
+<span class="text-gray-600 font-['Inter'] text-[10px] uppercase tracking-[0.1em]">© 2024 CLOTHLY ATELIER. ALL RIGHTS RESERVED.</span>
+</div>
+<div class="flex gap-8">
+<a class="text-gray-600 font-['Inter'] text-[10px] uppercase tracking-[0.1em] hover:text-white transition-colors duration-500" href="#">Privacy Policy</a>
+<a class="text-gray-600 font-['Inter'] text-[10px] uppercase tracking-[0.1em] hover:text-white transition-colors duration-500" href="#">Terms of Service</a>
+<a class="text-gray-600 font-['Inter'] text-[10px] uppercase tracking-[0.1em] hover:text-white transition-colors duration-500" href="#">Support</a>
+</div>
+</footer>
+</body></html>

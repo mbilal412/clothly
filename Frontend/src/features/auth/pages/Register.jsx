@@ -20,14 +20,18 @@ const Register = () => {
     password: "",
     isSeller: false
   })
+  const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setSubmitting(true);
     try {
       await handleRegister(formData);
       navigate('/');
     } catch (err) {
       console.error('something went wrong');
+    } finally {
+      setSubmitting(false);
     }
 
   }
@@ -99,8 +103,8 @@ const Register = () => {
               <label htmlFor="seller">I want to register as a Seller</label>
             </div>
 
-            <button type="submit" className="submitBtn {loading ? 'loading' : ''}" disabled={loading}>
-              REGISTER
+            <button type="submit" className={`submitBtn ${(loading || submitting) ? 'loading' : ''}`} disabled={loading || submitting}>
+              {submitting ? 'REGISTERING...' : 'REGISTER'}
             </button>
             {error && error.errors.length === 0 && <p className="fieldError">{error.message}</p>}
 

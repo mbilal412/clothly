@@ -1,0 +1,295 @@
+@import '../../../app/styles/tokens';
+
+.detailPageContent {
+  width: min(1100px, calc(100% - 2rem));
+}
+
+.detailLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: 0.9rem;
+  align-items: start;
+}
+
+.detailGalleryPanel,
+.detailInfoPanel,
+.billCard,
+.detailFallback {
+  background: $surface-container-low;
+  border: 1px solid rgba($outline, 0.3);
+  border-radius: 10px;
+}
+
+.detailGalleryPanel {
+  padding: 0.7rem;
+}
+
+.detailMainImage {
+  width: 100%;
+  margin: 0;
+  height: clamp(260px, 30vw, 320px);
+  object-fit: cover;
+  border-radius: 8px;
+  background: $surface-container-high;
+  display: block;
+}
+
+.detailThumbRow {
+  width: 100%;
+  margin: 0.55rem 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(74px, 1fr));
+  gap: 0.4rem;
+}
+
+.detailThumb {
+  border: 1px solid rgba($outline, 0.38);
+  border-radius: 6px;
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+  }
+
+  &.active {
+    border-color: rgba($primary, 0.75);
+  }
+}
+
+.detailInfoPanel {
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.detailHead {
+  display: flex;
+  flex-direction: column;
+  gap: 0.36rem;
+
+  h1 {
+    margin: 0;
+    font-family: $font-heading;
+    font-size: clamp(1.18rem, 2vw, 1.55rem);
+    line-height: 1.2;
+    color: $on-surface;
+  }
+}
+
+.detailEyebrow {
+  margin: 0;
+  color: $primary;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.62rem;
+  font-weight: 700;
+}
+
+.detailDescription {
+  margin: 0;
+  color: rgba($on-surface-variant, 0.93);
+  font-size: 0.76rem;
+  line-height: 1.48;
+}
+
+.detailPriceRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.detailPrice {
+  margin: 0;
+  color: $primary;
+  font-family: $font-heading;
+  font-size: 1.22rem;
+  font-weight: 700;
+}
+
+.quantityField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba($on-surface-variant, 0.95);
+
+  select {
+    min-width: 90px;
+    background: $surface-container-high;
+    color: $on-surface;
+    border: 1px solid rgba($outline, 0.5);
+    border-radius: 6px;
+    padding: 0.42rem 0.48rem;
+    font-family: $font-body;
+    font-size: 0.72rem;
+
+    &:focus {
+      outline: none;
+      border-color: rgba($primary, 0.8);
+    }
+  }
+}
+
+.detailActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.45rem;
+}
+
+.primaryAction,
+.secondaryAction {
+  border: none;
+  border-radius: 7px;
+  min-height: 38px;
+  font-family: $font-body;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+
+.primaryAction {
+  background: $primary;
+  color: $on-primary;
+}
+
+.secondaryAction {
+  background: transparent;
+  color: $on-surface;
+  border: 1px solid rgba($outline, 0.52);
+}
+
+.detailActionText {
+  margin: 0;
+  color: rgba($on-surface-variant, 0.95);
+  font-size: 0.7rem;
+}
+
+.billCard {
+  padding: 0.65rem;
+
+  h2 {
+    margin: 0 0 0.58rem;
+    font-size: 0.83rem;
+    font-family: $font-heading;
+    color: $on-surface;
+  }
+}
+
+.billRow,
+.billTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.billRow {
+  margin-bottom: 0.35rem;
+
+  span,
+  strong {
+    font-size: 0.72rem;
+  }
+
+  span {
+    color: rgba($on-surface-variant, 0.9);
+  }
+
+  strong {
+    color: $on-surface;
+    font-weight: 600;
+  }
+}
+
+.billTotal {
+  margin-top: 0.55rem;
+  border-top: 1px solid rgba($outline, 0.28);
+  padding-top: 0.45rem;
+
+  span {
+    color: $on-surface;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  strong {
+    color: $primary;
+    font-size: 0.84rem;
+    font-weight: 700;
+  }
+}
+
+.sellerRef {
+  margin: 0;
+  color: rgba($on-surface-variant, 0.75);
+  font-size: 0.62rem;
+  word-break: break-all;
+}
+
+.detailNotice,
+.detailError {
+  margin: 0;
+  padding: 0.72rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid rgba($outline, 0.3);
+  background: rgba($surface-container-low, 0.88);
+  font-size: 0.74rem;
+}
+
+.detailNotice {
+  color: rgba($on-surface-variant, 0.95);
+}
+
+.detailError {
+  color: $error;
+}
+
+.detailFallback {
+  padding: 1rem;
+
+  h1 {
+    margin: 0;
+    font-family: $font-heading;
+    font-size: 1.1rem;
+  }
+
+  p {
+    margin: 0.35rem 0 0.7rem;
+    color: rgba($on-surface-variant, 0.92);
+    font-size: 0.74rem;
+  }
+}
+
+.detailBackLink {
+  color: $primary;
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+@media (max-width: 920px) {
+  .detailLayout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .detailPageContent {
+    width: calc(100% - 1.6rem);
+  }
+
+  .detailActions {
+    grid-template-columns: 1fr;
+  }
+}

@@ -10,3 +10,12 @@ export const createProductService = async (productData) => {
     return response.data
 }
 
+export const getProductsService = async () => {
+    const response = await api.get('/api/products/get-products')
+    return response.data
+}
+
+export const getAllProductsService = async () =>{
+    const response = await api.get('/api/products/get-all-products')
+    return response.data
+}

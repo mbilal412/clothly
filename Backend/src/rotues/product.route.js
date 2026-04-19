@@ -1,6 +1,7 @@
 import express from 'express';
-import {authenticateSeller} from '../middlewares/auth.middleware.js';
-import { createProductController, getProductsController } from '../controllers/product.controller.js';
+import {authenticateSeller, authenticateUser} from '../middlewares/auth.middleware.js';
+import { createProductController, getProductsController, getAllProductsController } from '../controllers/product.controller.js';
+import { createProductValidation } from '../validators/product.validator.js';
 
 import multer from 'multer';
 
@@ -18,7 +19,8 @@ const productRouter = express.Router();
 
 // Define product routes here       
 
-productRouter.post('/create-product', upload.array('images', 7), authenticateSeller, createProductController)
+productRouter.post('/create-product', upload.array('images', 7), authenticateSeller, createProductValidation, createProductController)
 productRouter.get('/get-products', authenticateSeller, getProductsController)
+productRouter.get('/get-all-products', getAllProductsController)
 
 export default productRouter;

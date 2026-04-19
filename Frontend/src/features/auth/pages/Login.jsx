@@ -3,22 +3,37 @@ import { Link } from 'react-router'; // or react-router-dom depending on setup, 
 import '../styles/auth.scss';
 import { useAuth } from '../hooks/useAuth';
 import { useSelector } from 'react-redux';
-
+import { useNavigate } from 'react-router';
 
 const Login = () => {
+  const navigate = useNavigate();
   const { error } = useSelector(state => state.auth);
   const { loading } = useSelector(state => state.auth);
+  const user = useSelector(state => state.auth.user);
 
 
   const [formData, setFormData] = React.useState({
     email: "",
     password: ""
   });
+  const [submitting, setSubmitting] = React.useState(false);
   const { handleLogin } = useAuth();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    handleLogin(formData);
+    setSubmitting(true);
+    try {
+      await handleLogin(formData);
+      if(user.role === 'seller') {
+        navigate('/view-products'); // Redirect to seller dashboard or add product page
+      }
+      navigate('/'); // Redirect to home or dashboard after successful login
+    } catch (err) {
+      console.log('Login error:', err);
+      // Error is already handled in useAuth, so no need to do anything here
+    } finally {
+      setSubmitting(false);
+    }
   }
 
 
@@ -77,8 +92,8 @@ const Login = () => {
               )}
             </div>
 
-            <button type="submit" className="submitBtn {loading ? 'loading' : ''}" disabled={loading}>
-              LOGIN
+            <button type="submit" className={`submitBtn ${(loading || submitting) ? 'loading' : ''}`} disabled={loading || submitting}>
+              {submitting ? 'LOGGING IN...' : 'LOGIN'}
             </button>
             
             {error && error.errors.length === 0 && <p className="fieldError">{error.message}</p>}

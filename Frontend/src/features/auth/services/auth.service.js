@@ -15,3 +15,7 @@ export const login = async (credentials) => {
     return response.data
 }
 
+export const getMe = async () => {
+    const response = await api.get('/api/auth/me')
+    return response.data
+}

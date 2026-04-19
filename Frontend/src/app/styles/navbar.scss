@@ -1,0 +1,186 @@
+@import 'tokens';
+
+.topNav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 50;
+  border-radius: 0;
+  background-color: rgba(#131313, 0.8);
+  backdrop-filter: blur(24px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3rem;
+  height: 3rem;
+  box-sizing: border-box;
+}
+
+.navLeft {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  color: #E9C176; /* $primary if mapped, using exact color for precision */
+  text-transform: uppercase;
+  font-family: 'Manrope', sans-serif;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navLink {
+  color: #6b7280; /* text-gray-500 */
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.625rem; /* 10px */
+  text-decoration: none;
+  transition: color 0.3s ease, opacity 0.3s ease;
+
+  &:hover {
+    color: #ffffff;
+  }
+
+  &.active {
+    color: #E9C176;
+    border-bottom: 1px solid #E9C176;
+    padding-bottom: 0.25rem;
+    font-weight: 500;
+  }
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.accountInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.accountText {
+  text-align: right;
+}
+
+.accountLabel {
+  margin: 0;
+  font-size: 0.625rem; /* 10px */
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #d1c5b4; /* on-surface-variant */
+  font-family: 'Inter', sans-serif;
+}
+
+.avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  object-fit: cover;
+  border: 1px solid rgba(233, 193, 118, 0.2); /* primary/20 */
+}
+
+.logoutBtn {
+  background: transparent;
+  border: none;
+  color: #6b7280;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.625rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #ffffff;
+  }
+}
+
+.guestActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.authBtn {
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.62rem;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 0.38rem 0.62rem;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.loginBtn {
+  color: #d1c5b4;
+  border: 1px solid rgba(209, 197, 180, 0.3);
+
+  &:hover {
+    color: #ffffff;
+    border-color: rgba(233, 193, 118, 0.45);
+  }
+}
+
+.registerBtn {
+  color: #412d00;
+  border: 1px solid rgba(233, 193, 118, 0.5);
+  background: #e9c176;
+
+  &:hover {
+    background: #f0ce8a;
+    border-color: rgba(240, 206, 138, 0.8);
+  }
+}
+
+@media (max-width: 768px) {
+  .DesktopOnly {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .DesktopOnlySm {
+    display: none;
+  }
+  .topNav {
+    padding: 0 1.5rem;
+  }
+  .navLeft {
+    gap: 1rem;
+  }
+
+  .authBtn {
+    padding: 0.34rem 0.54rem;
+    font-size: 0.58rem;
+  }
+}
+
+.sellerBadge {
+  background: rgba(233, 193, 118, 0.15);
+  color: #E9C176;
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1px solid rgba(233, 193, 118, 0.3);
+}
+
